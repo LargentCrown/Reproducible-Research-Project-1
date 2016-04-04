@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="John Daniels" />
+
+
+<title>PA_1 Template</title>
+
+<script src="PA1_Template_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="PA1_Template_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="PA1_Template_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="PA1_Template_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="PA1_Template_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="PA1_Template_files/highlight/default.css"
+      type="text/css" />
+<script src="PA1_Template_files/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="PA1_Template_files/navigation-1.0/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+<h1 class="title">PA_1 Template</h1>
+<h4 class="author"><em>John Daniels</em></h4>
+<h4 class="date"><em>April 1, 2016</em></h4>
+
+</div>
+
+
+<div id="project-1-for-reproducible-research" class="section level1">
+<h1><strong>Project 1 for Reproducible Research</strong></h1>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>John Hopkins University and Coursera assigned a research assignment that required the use of data from a personal activity devices like <em>Fitbit, Nike Fuelband or Jawbone Up.</em> More specifically this device gathers data at 5 minute intervals during the day. The data consists of two months of information from an annonymous canidate collected during the months of Oct and Nov 2012 and include the number of steps taken daily in 5 minute intervals.</p>
+</div>
+<div id="loading-and-processing-the-data-into-rstudio-r-x64-3.2.4" class="section level2">
+<h2>Loading and processing the data into Rstudio, R x64 3.2.4</h2>
+<p>Load the dataset, read.csv() the unzipped file and see what's in it.</p>
+<pre class="r"><code>url = &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;
+download.file(url, destfile = &quot;activity.zip&quot;, mode = &quot;wb&quot;)
+dateDownloaded &lt;- date()
+unzip(&quot;activity.zip&quot;)
+activity = read.csv(&quot;activity.csv&quot;, header=T, colClasses = c(&quot;integer&quot;, &quot;character&quot;, &quot;integer&quot;) ,sep = &quot;,&quot;)
+
+dateDownloaded</code></pre>
+<pre><code>## [1] &quot;Mon Apr 04 01:41:33 2016&quot;</code></pre>
+<pre class="r"><code>dim(activity)</code></pre>
+<pre><code>## [1] 17568     3</code></pre>
+<pre class="r"><code>names(activity)</code></pre>
+<pre><code>## [1] &quot;steps&quot;    &quot;date&quot;     &quot;interval&quot;</code></pre>
+<pre class="r"><code>head(activity)</code></pre>
+<pre><code>##   steps       date interval
+## 1    NA 2012-10-01        0
+## 2    NA 2012-10-01        5
+## 3    NA 2012-10-01       10
+## 4    NA 2012-10-01       15
+## 5    NA 2012-10-01       20
+## 6    NA 2012-10-01       25</code></pre>
+<pre class="r"><code>tail(activity)</code></pre>
+<pre><code>##       steps       date interval
+## 17563    NA 2012-11-30     2330
+## 17564    NA 2012-11-30     2335
+## 17565    NA 2012-11-30     2340
+## 17566    NA 2012-11-30     2345
+## 17567    NA 2012-11-30     2350
+## 17568    NA 2012-11-30     2355</code></pre>
+<pre class="r"><code>str(activity)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : chr  &quot;2012-10-01&quot; &quot;2012-10-01&quot; &quot;2012-10-01&quot; &quot;2012-10-01&quot; ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...</code></pre>
+</div>
+<div id="what-is-the-total-number-of-steps-per-day" class="section level2">
+<h2><strong>What is the total number of steps per day?</strong></h2>
+<ol style="list-style-type: decimal">
+<li>Calculate the total number of steps per day. <em>By aggregating to total the sum.</em></li>
+</ol>
+<pre class="r"><code>activity$date &lt;- as.Date(activity$date)
+totalStepsdays &lt;- aggregate(steps ~ date, activity,  FUN = sum)
+colnames(totalStepsdays) &lt;- c(&quot;days&quot; ,&quot;steps&quot;)
+
+str(totalStepsdays)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    53 obs. of  2 variables:
+##  $ days : Date, format: &quot;2012-10-02&quot; &quot;2012-10-03&quot; ...
+##  $ steps: int  126 11352 12116 13294 15420 11015 12811 9900 10304 17382 ...</code></pre>
+<p><em>This data.frame shows us 53 observations of the Days and Steps.</em></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Make a histogram of the total number of steps per day.</li>
+</ol>
+<pre class="r"><code>par(mar = c(5,8,3,1))
+
+hist(totalStepsdays$steps, breaks = 10, 
+   col = &quot;blue&quot;, xlab = &quot;Daily Steps&quot;, main = &quot;Total Steps In A Day&quot;)</code></pre>
+<p><img src="PA1_Template_files/figure-html/unnamed-chunk-3-1.png" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Calculate and report the mean and median of the total number of steps per day</li>
+</ol>
+<pre class="r"><code>mean(totalStepsdays$steps)</code></pre>
+<pre><code>## [1] 10766.19</code></pre>
+<p><em>The mean of the total number of steps per day is 10766.19</em></p>
+<pre class="r"><code>median(totalStepsdays$steps)</code></pre>
+<pre><code>## [1] 10765</code></pre>
+<p><em>The median of the total number of steps per day is 10765</em></p>
+</div>
+<div id="what-is-the-average-daily-activity-pattern" class="section level2">
+<h2><strong>What is the average daily activity pattern?</strong></h2>
+<ol style="list-style-type: decimal">
+<li>Make a time series plot (i.e. type = &quot;l&quot;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis) <em>To get the average daily activity pattern aggregate the date on stepsby interval and use the mean</em></li>
+</ol>
+<pre class="r"><code>AVGsteps &lt;- aggregate(steps ~ interval, activity, FUN = mean, na.rm = TRUE)
+colnames(AVGsteps) &lt;- c(&quot;interval&quot;, &quot;avg&quot;)
+
+str(AVGsteps)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    288 obs. of  2 variables:
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+##  $ avg     : num  1.717 0.3396 0.1321 0.1509 0.0755 ...</code></pre>
+<pre class="r"><code>with(AVGsteps, plot(interval, avg, type =&#39;l&#39;, xlab = &quot;Time Intervals&quot;, 
+ylab = &quot;Average Interval Daily Steps&quot;, main = &quot;Average Daily Activity 
+Pattern&quot;, col = &quot;blue&quot; ))</code></pre>
+<p><img src="PA1_Template_files/figure-html/unnamed-chunk-7-1.png" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?</li>
+</ol>
+<pre class="r"><code>MAXsteps &lt;- max(AVGsteps$avg)
+AVGsteps[AVGsteps$avg == MAXsteps, ]</code></pre>
+<pre><code>##     interval      avg
+## 104      835 206.1698</code></pre>
+<p><em>The interval with the largest average number steps was at 835 and an average of 206 steps.</em></p>
+</div>
+<div id="imputing-missing-values" class="section level2">
+<h2><strong>Imputing missing values</strong></h2>
+<ol style="list-style-type: decimal">
+<li>Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)</li>
+</ol>
+<pre class="r"><code>sum(is.na(activity$steps))</code></pre>
+<pre><code>## [1] 2304</code></pre>
+<p><em>The total number of NA's | missing values in the dataset is 2304.</em></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc. <em>Since there's like 2304 NA's|missing values I'll sub the NA's with the avg for that 5-minute interval.</em></li>
+</ol>
+<pre class="r"><code>head(activity)</code></pre>
+<pre><code>##   steps       date interval
+## 1    NA 2012-10-01        0
+## 2    NA 2012-10-01        5
+## 3    NA 2012-10-01       10
+## 4    NA 2012-10-01       15
+## 5    NA 2012-10-01       20
+## 6    NA 2012-10-01       25</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Create a new dataset that is equal to the original dataset but with the missing data filled in.</li>
+</ol>
+<pre class="r"><code>activity2 &lt;- subset(activity, !is.na(activity$steps))
+dAta &lt;- activity
+imPact &lt;- is.na(dAta$steps)
+tAvg &lt;- tapply(activity2$steps, activity2$interval, mean, na.rm = TRUE, simplify = T)
+dAta$steps[imPact] &lt;- tAvg[as.character(dAta$interval[imPact])]</code></pre>
+<p>Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?</p>
+<pre class="r"><code>totalStepsperday2 &lt;- aggregate(steps ~ date, dAta, FUN = sum)</code></pre>
+<pre class="r"><code> par(mar = c(5,8,3,1))
+
+hist(totalStepsperday2$steps, breaks = 10, col = &quot;green&quot;, xlab = &quot;Daily Steps&quot;, main = &quot;Total Steps In A Day&quot;)
+hist(totalStepsdays$steps, breaks = 10, col = &quot;blue&quot;, xlab = &quot;Daily Steps&quot;, 
+main = &quot;Total Steps In A Day&quot;, add=T) 
+legend(&quot;topleft&quot;, c(&quot;Imputed&quot;, &quot;NA&quot;), fill = c(&quot;green&quot;,&quot;blue&quot;))</code></pre>
+<p><img src="PA1_Template_files/figure-html/unnamed-chunk-13-1.png" /></p>
+<pre class="r"><code>mean(totalStepsdays$steps)</code></pre>
+<pre><code>## [1] 10766.19</code></pre>
+<pre class="r"><code>mean(totalStepsperday2$steps)</code></pre>
+<pre><code>## [1] 10766.19</code></pre>
+<pre class="r"><code>median(totalStepsdays$steps)</code></pre>
+<pre><code>## [1] 10765</code></pre>
+<pre class="r"><code>median(totalStepsperday2$steps)</code></pre>
+<pre><code>## [1] 10766.19</code></pre>
+<p><em>Yes both means seemed to remain the same but the median after imputing slightly raised.</em></p>
+</div>
+<div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
+<h2><strong>Are there differences in activity patterns between weekdays and weekends?</strong></h2>
+<p><em>For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.</em></p>
+<ol style="list-style-type: decimal">
+<li>Create a new factor variable in the dataset with two levels - &quot;weekday&quot; and &quot;weekend&quot; indicating whether a given date is a weekday or weekend day.</li>
+</ol>
+<pre class="r"><code>dAta$date &lt;- as.Date(dAta$date)
+dAta$day &lt;- weekdays(dAta$date)
+dAta$indicate_day &lt;- as.factor(ifelse(dAta$day == &quot;Saturday&quot; | dAta$day == &quot;Sunday&quot;, &quot;weekend&quot;, &quot;weekday&quot;))</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Make a panel plot containing a time series plot (i.e. type = &quot;l&quot;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.</li>
+</ol>
+<pre class="r"><code>library(lattice)
+g &lt;- aggregate(steps ~ interval + indicate_day, dAta, mean)
+xyplot(steps ~ interval | factor(indicate_day), g, layout=c(1, 2), main 
+= &quot;Time Series Plot For Weekends and Weekdays&quot;, xlab = &quot;Interval&quot;, ylab 
+= &quot;Avg Steps Count&quot;, lty = 1, typ = &quot;l&quot; )</code></pre>
+<p><img src="PA1_Template_files/figure-html/unnamed-chunk-16-1.png" /></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
