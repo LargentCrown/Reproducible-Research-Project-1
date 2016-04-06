@@ -4,7 +4,6 @@ author: "John Daniels"
 date: "April 1, 2016"
 output:
   html_document:
-    fig_caption: yes
     keep_md: yes
     smart: no
   pdf_document:
@@ -24,6 +23,7 @@ annonymous canidate collected during the months of Oct and Nov 2012 and include 
 
 ## Loading and processing the data into Rstudio, R x64 3.2.4 
  Load the dataset, read.csv() the unzipped file and see what's in it.
+
 
 
 ```{r}
