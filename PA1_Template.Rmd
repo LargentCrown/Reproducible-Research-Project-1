@@ -71,7 +71,7 @@ str(totalStepsdays)
 2. Make a histogram of the total number of steps per day.
 
 
-```{r Total Steps In A Day, fig.height=4}
+```{r Total Steps In A Day, fig.height=4, fig.show="asis"}
 par(mar = c(5,8,3,1))
 
 hist(totalStepsdays$steps, breaks = 10, 
@@ -107,7 +107,7 @@ str(AVGsteps)
 ```
 
 
-```{r Average Interval Daily Steps,fig.height=4}
+```{r Average Interval Daily Steps,fig.height=4, fig.show="asis"}
 with(AVGsteps, plot(interval, avg, type ='l', xlab = "Time Intervals", 
 ylab = "Average Interval Daily Steps", main = "Average Daily Activity 
 Pattern", col = "blue" ))
@@ -170,7 +170,7 @@ totalStepsperday2 <- aggregate(steps ~ date, dAta, FUN = sum)
 
 
 
-```{r Total Steps In A Day Imputed, fig.height=4}
+```{r Total Steps In A Day Imputed, fig.height=4, fig.show="asis"}
  par(mar = c(5,8,3,1))
 
 hist(totalStepsperday2$steps, breaks = 10, col = "green", xlab = "Daily Steps", main = "Total Steps In A Day")
@@ -210,7 +210,7 @@ dAta$indicate_day <- as.factor(ifelse(dAta$day == "Saturday" | dAta$day == "Sund
 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
 
 
-```{r Time Series Plot For Weekends and Weekdays, fig.height=4}
+```{r Time Series Plot For Weekends and Weekdays, echo="TRUE", fig.height=4, fig.show="asis"}
 library(lattice)
 g <- aggregate(steps ~ interval + indicate_day, dAta, mean)
 xyplot(steps ~ interval | factor(indicate_day), g, layout=c(1, 2), main 
