@@ -20,14 +20,16 @@ annonymous canidate collected during the months of Oct and Nov 2012 and include 
 url = "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
 download.file(url, destfile = "activity.zip", mode = "wb")
 dateDownloaded <- date()
+
 unzip("activity.zip")
 activity = read.csv("activity.csv", header=T, colClasses = c("integer", "character", "integer") ,sep = ",")
+
 
 dateDownloaded
 ```
 
 ```
-## [1] "Tue Apr 05 07:00:27 2016"
+## [1] "Tue Apr 05 20:25:01 2016"
 ```
 
 ```r
@@ -120,7 +122,7 @@ hist(totalStepsdays$steps, breaks = 10,
    col = "blue", xlab = "Daily Steps", main = "Total Steps In A Day")
 ```
 
-![](PA1_Template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_Template_files/figure-html/Total Steps In A Day-1.png)<!-- -->
 
 3. Calculate and report the mean and median of the total number of steps per day
 
@@ -174,7 +176,7 @@ ylab = "Average Interval Daily Steps", main = "Average Daily Activity
 Pattern", col = "blue" ))
 ```
 
-![](PA1_Template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](PA1_Template_files/figure-html/Average Interval Daily Steps-1.png)<!-- -->
 
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -261,7 +263,7 @@ main = "Total Steps In A Day", add=T)
 legend("topleft", c("Imputed", "NA"), fill = c("green","blue"))
 ```
 
-![](PA1_Template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](PA1_Template_files/figure-html/Total Steps In A Day Imputed-1.png)<!-- -->
 
 
 
@@ -329,5 +331,5 @@ xyplot(steps ~ interval | factor(indicate_day), g, layout=c(1, 2), main
 = "Avg Steps Count", lty = 1, typ = "l" )
 ```
 
-![](PA1_Template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](PA1_Template_files/figure-html/Time Series Plot For Weekends and Weekdays-1.png)<!-- -->
 
