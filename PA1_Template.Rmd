@@ -3,11 +3,11 @@ title: "PA_1 Template"
 author: "John Daniels"
 date: "April 1, 2016"
 output:
+  pdf_document:
+    keep_tex: yes
   html_document:
     fig_caption: yes
     keep_md: yes
-  pdf_document:
-    keep_tex: yes
   word_document:
     fig_caption: yes
 ---
